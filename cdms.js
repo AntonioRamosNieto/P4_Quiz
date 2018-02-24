@@ -75,8 +75,9 @@ exports.playCmd = (rl) => {
 	
 	const playOne=()=>{
 		if(quedan.length <= 0){
-			log('Quiz terminado','yellow');
-			log(`Respuestas correctas: ${colorize(score,'magenta')}`);
+			log('No hay nada mas que preguntar');
+			log(`Fin de juego. Aciertos: ${score}`);
+			biglog(score,'magenta');
 			rl.prompt();
 		}else{
 			let id=Math.floor(Math.random()*(quedan.length));
@@ -84,13 +85,13 @@ exports.playCmd = (rl) => {
 			quedan.splice(id,1);
 			rl.question(colorize(`${quiz.question}? `,'red'),respuesta=>{
 				if(respuesta.toLowerCase().trim()===quiz.answer.toLowerCase()){
-					biglog('CORRECTO','green');
 					score++;
-					log(`lleva ${score} aciertos.`);
+					log(`CORRECTO-Lleva ${score} aciertos.`);
 					playOne();
 				}else{
-					biglog('INCORRECTO','red');
-					log(`Respuestas correctas: ${colorize(score,'magenta')}`);
+					log('INCORRECTO.');
+					log(`Fin de juego. Aciertos: ${score}`);
+					biglog(score,'magenta');
 					rl.prompt();
 				}
 			});
@@ -152,8 +153,12 @@ exports.testCmd=(rl,id)=>{
 			const quiz = model.getByIndex(id);
 			rl.question(colorize(`${quiz.question}? `,'red'),respuesta=>{
 				if(respuesta.toLowerCase().trim()===quiz.answer.toLowerCase()){
+					log(`su respuesta es correcta.`)
 					biglog('CORRECTO','green');
-				}else{biglog('INCORRECTO','red');}
+				}else{
+					log(`su respuesta es incorrecta.`)
+					biglog('INCORRECTO','red');
+				}
 				rl.prompt();
 			});
 
@@ -165,7 +170,8 @@ exports.testCmd=(rl,id)=>{
 };
 
 exports.creditsCmd = (rl) => {
-  console.log("Autor: Antonio Ramos Nieto");
+  console.log('Autor de la práctica:');
+  console.log(`${colorize('Antonio Ramos Nieto','green')}`);
   rl.prompt();
 }
 
