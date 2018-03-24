@@ -238,8 +238,8 @@ exports.testCmd=(socket,rl,id)=>{
 };
 
 exports.creditsCmd = (socket,rl) => {
-  console.log(socket,'Autor de la práctica:');
-  console.log(socket,`${colorize('Antonio Ramos Nieto','green')}`);
+  log(socket,'Autor de la práctica:');
+  log(socket,`${colorize('Antonio Ramos Nieto','green')}`);
   rl.prompt();
 }
 
