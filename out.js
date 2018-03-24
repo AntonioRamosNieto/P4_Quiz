@@ -8,14 +8,14 @@ exports.colorize =(msg, color) => {
   return msg;
 };
 
-exports.log=(msg,color)=> {
-  console.log(this.colorize(msg,color));
+exports.log=(socket,msg,color)=> {
+  socket.write(this.colorize(msg,color)+"\n");
 };
 
-exports.biglog=(msg,color)=>{
-  this.log(figlet.textSync(msg,{horizontalLayout:'full'}),color);
+exports.biglog=(socket,msg,color)=>{
+  this.log(socket,figlet.textSync(msg,{horizontalLayout:'full'}),color);
 };
 
-exports.errorlog=(emsg)=>{
-  console.log(`${this.colorize("Error","red")}:${this.colorize(this.colorize(emsg,"red"),"bgYellowBright")}`);
+exports.errorlog=(socket,emsg)=>{
+  socket.write(`${this.colorize("Error","red")}:${this.colorize(this.colorize(emsg+"\n","red"),"bgYellowBright")}`);
 };
